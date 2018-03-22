@@ -221,12 +221,12 @@ $(function (undef) {
             return divOpen + '<embed src="file:///dev/cam0" type="video/raw" width="' + viewportDims[0] + '" height="' + viewportDims[1] + '" loop=999 />' + divClose;
 
         } else if (isSet("OPTIONS_USING_DIGITAL_CAMERAS")) {
-            var content = '<embed src="rtsp://1.1.1.' + zoomedCam + ':7070/track1" type="video/mp4" width="' + viewportDims[0] + '" height="' + viewportDims[1] + '" loop=999 id=' + zoomedCam + ' />';
+            var content = '<embed src="rtsp://1.1.1.' + zoomedCam + ':554/s0" type="video/mp4" width="' + viewportDims[0] + '" height="' + viewportDims[1] + '" loop=999 id=' + zoomedCam + ' />';
 
             for (var i = 1; i <= VMS.SYS.numCams; i++) {
                 if(i == zoomedCam) continue;
 
-                content = content + '<embed class="thumbnail" src="rtsp://1.1.1.' + i + ':7070/track1" type="video/mp4" width="' + thumbDims[0] + '" height="' + thumbDims[1] + '" loop=999 id=' + i + ' />';
+                content = content + '<embed class="thumbnail" src="rtsp://1.1.1.' + i + ':554/s0" type="video/mp4" width="' + thumbDims[0] + '" height="' + thumbDims[1] + '" loop=999 id=' + i + ' />';
             }
             /*
             // Marina: temporary dummies

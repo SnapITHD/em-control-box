@@ -19,7 +19,7 @@
 #define LIVERTSP_EXIT_CLEAN                  0
 #define LIVERTSP_EXIT_DURATION_OVER          1
 
-#define REQUEST_STREAMING_OVER_TCP  false
+#define REQUEST_STREAMING_OVER_TCP  true       // TCP is required
 #define SOCKET_FILE_BUFFER_SIZE     262144
 
 // RTSP 'response handlers'

@@ -5,7 +5,7 @@ Electronic monitoring control box for commercial fisheries.
 
 # How To Contribute
 
-On a development system, the project source code is saved in /opt/em. First get a fresh version of the code in your dev environment:
+On a development system (you must choose this in grub, when booting, rather than a production image), the project source code is saved in /opt/em. To access a terminal, type `ctrl-alt-f1` and log in. First get a fresh version of the code in your dev environment:
 
 ```
 cd /opt/em
@@ -33,6 +33,18 @@ And then share them with the world!
 ```
 git push origin master
 ```
+# To Run Your Custom Build
+
+To Build locally, just
+
+```
+em stop
+cd /opt/em/src
+make
+em start
+```
+
+You're now running your own build of the EM software.
 
 # How Build a New Image
 
@@ -91,3 +103,30 @@ After building, or after putting an already-built image (such as the one off dro
 `em upgrade /opt/em/images/em-2.2.1`
  
 And that will mount /boot, copy the image there, append to the grub.cfg file, and unmount /boot
+
+
+# How to Create An Image With Booatloader
+
+For brand new boxes, the OS disk must first be imaged with a bootloader version of the EM image. To build this, simply clone the entire EM dev box disk to a file. First clean it up.
+
+```
+em stop
+em clean
+em resetelog
+```
+
+zero out empty blocks for compression.
+```
+mount /dev/sda1 /boot
+dd if=/dev/zero of=/boot/zero
+dd if=/dev/zero of=/zero
+dd if=/dev/zero of=/var/em/zero
+rm /boot/zero
+rm /var/em/zero
+rm /zero
+```
+
+Then boot into ubuntu, and image the disk (supposing it's sda here)
+```
+dd if=/dev/sda bs=1M | gzip -c > em-boot-<ver>.gz
+```

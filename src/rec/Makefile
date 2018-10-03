@@ -1,5 +1,5 @@
 TARGET := ../../bin/em-rec
-SRCS := output.cpp config.cpp StateMachine.cpp Sensor.cpp GPSSensor.cpp ADSensor.cpp RFIDSensor.cpp liveRTSP.cpp CaptureManager.cpp md5.cpp em-rec.cpp
+SRCS := output.cpp config.cpp StateMachine.cpp Sensor.cpp GPSSensor.cpp ADSensor.cpp RFIDSensor.cpp liveRTSP.cpp CaptureManager.cpp md5.cpp em-rec.cpp snapithd.cpp
 OBJS := $(SRCS:.cpp=.o) 
 DEPS := $(SRCS:.cpp=.dep) 
 XDEPS := $(wildcard $(DEPS))

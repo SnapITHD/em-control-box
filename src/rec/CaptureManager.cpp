@@ -376,7 +376,11 @@ void CaptureManager::thr_IPCaptureLoop() {
 
         D("Beginning Live555 init ...");
         for(_ACTIVE_CAMS) { // i = cam index
-            snprintf(url, sizeof(url), DIGITAL_RTSP_URL, i + 1); // PRODUCTION
+            if (em_data->isShdCam[i] == true) {
+                snprintf(url, sizeof(url), DIGITAL_SNAPIT_RTSP_URL, i + 1); // SnapHD swap
+            } else {
+                snprintf(url, sizeof(url), DIGITAL_RTSP_URL, i + 1); // Ecotrust standard cameras PRODUCTION
+            }
             //snprintf(url, sizeof(url), DIGITAL_RTSP_URL, 1); // HACK to force multi-cam testing with just one cam
 
             // open and start streaming each URL

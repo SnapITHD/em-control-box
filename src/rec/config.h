@@ -39,7 +39,8 @@ typedef struct {
 			GPS_DEV,
 			RFID_DEV,
 			HOME_PORT_DATA,
-			FERRY_DATA;
+			FERRY_DATA,
+			SHD_ARRAY;
 
 	unsigned short psi_low_threshold,
 				   psi_high_threshold,

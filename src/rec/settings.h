@@ -39,6 +39,10 @@
 
 #define DIGITAL_MAX_CAMS            4
 #define DIGITAL_RTSP_URL            "rtsp://1.1.1.%d:7070/track1"
+#define DIGITAL_SNAPIT_RTSP_URL     "rtsp://1.1.1.%d:554/s0"
+//                                  #  1  #  2  #  3  #  4  #
+#define SNAPIT_CAMARRAY             "false,false,false,false" // To flag each camera ip as a snapit camera
+
 #define DIGITAL_HTTP_API_COMMAND    "/usr/bin/wget -q -O - \"$@\" \"%s\""
 #define DIGITAL_HTTP_API_URL        "http://1.1.1.%d/cgi-bin/encoder?USER=Admin&PWD=123456%s"
 #define DIGITAL_HTTP_API_FPS        "&VIDEO_FPS_NUM="

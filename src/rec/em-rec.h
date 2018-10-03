@@ -130,6 +130,9 @@ typedef struct {
 	unsigned long AD_lastHonkIteration;
 	string AD_alert_type;
 
+	// Snapit HD Cameras
+	bool isShdCam[4];
+
 	pthread_mutex_t mtx;
 } EM_DATA_TYPE;
 

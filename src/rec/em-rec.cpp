@@ -32,6 +32,7 @@ You may contact Ecotrust Canada via our website http://ecotrust.ca
 #include "md5.h"
 #include "output.h"
 #include "ignore-value.h"
+#include "snapithd.h"
 
 #include <sstream>
 #include <iostream>
@@ -125,8 +126,11 @@ int main(int argc, char *argv[]) {
     G_EM_DATA.GPS_ferryDataFile = getConfig("FERRY_DATA", DEFAULT_FERRY_DATA);
     G_EM_DATA.AD_alert_type = getConfig("alert_type", DEFAULT_alert_type);
 
+    G_CONFIG.SHD_ARRAY = getConfig("SHD_CAMS", SNAPIT_CAMARRAY);
     
     if(G_ARG_DUMP_CONFIG) exit(0);
+
+    ParseSHD(G_EM_DATA.isShdCam, G_CONFIG.SHD_ARRAY);
 
     __threadId = THREAD_MAIN;
     I("Ecotrust EM Recorder v" + VERSION + " is starting");

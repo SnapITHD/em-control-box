@@ -38,6 +38,8 @@ VMS.AD = {};
 VMS.RFID = {};
 VMS.UISensors = {};
 
+var CAMSTATUS = {};
+
 function isSet(state) {
     var component = state.substr(0, state.indexOf('_'));
 
@@ -90,6 +92,13 @@ $(function (undef) {
         LRG_DIAL = $.extend({}, ALL_DIALS, {});
 
     $TABS = $('.tab-body');
+
+    /* GetSHD Data */
+    $.getJSON("http://" + window.location.hostname + ":9090/getcams", function(status){
+        if (status) {
+            CAMSTATUS = status;
+        }
+    });
     
     /* State flags / messages */
     $.getJSON('/states.json', function (definitions) {
@@ -221,12 +230,20 @@ $(function (undef) {
             return divOpen + '<embed src="file:///dev/cam0" type="video/raw" width="' + viewportDims[0] + '" height="' + viewportDims[1] + '" loop=999 />' + divClose;
 
         } else if (isSet("OPTIONS_USING_DIGITAL_CAMERAS")) {
-            var content = '<embed src="rtsp://1.1.1.' + zoomedCam + ':7070/track1" type="video/mp4" width="' + viewportDims[0] + '" height="' + viewportDims[1] + '" loop=999 id=' + zoomedCam + ' />';
-
+            var rtspPortURI = ":7070/track1";
+            if (CAMSTATUS.Type[zoomedCam - 1] == true) {
+                rtspPortURI = ":554/s0";
+            }
+            var content = '<embed src="rtsp://1.1.1.' + zoomedCam + rtspPortURI +'" type="video/mp4" width="' + viewportDims[0] + '" height="' + viewportDims[1] + '" loop=999 id=' + zoomedCam + ' />';
+            //console.log ('Zoomed Camera = rtsp://1.1.1.' + zoomedCam + rtspPortURI);
             for (var i = 1; i <= VMS.SYS.numCams; i++) {
                 if(i == zoomedCam) continue;
-
-                content = content + '<embed class="thumbnail" src="rtsp://1.1.1.' + i + ':7070/track1" type="video/mp4" width="' + thumbDims[0] + '" height="' + thumbDims[1] + '" loop=999 id=' + i + ' />';
+                rtspPortURI = ":7070/track1";
+                if (CAMSTATUS.Type[i-1] == true) {
+                    rtspPortURI = ":554/s0";
+                }
+                content = content + '<embed class="thumbnail" src="rtsp://1.1.1.' + i + rtspPortURI +'" type="video/mp4" width="' + thumbDims[0] + '" height="' + thumbDims[1] + '" loop=999 id=' + i + ' />';
+                //console.log ('Viewport = rtsp://1.1.1.' + i + rtspPortURI);
             }
             /*
             // Marina: temporary dummies

@@ -218,7 +218,7 @@ buildem_start() {
 	stripnodeapp_start /opt/em ${DEST}/opt/em
 
 	echo -ne "	${STAR} Stripping executables ... " &&
-	find ${DEST} | xargs file | grep "executable" | grep ELF | cut -f 1 -d : | xargs -r strip --strip-unneeded
+	find ${DEST} ! -name 'gofigure*' | xargs file | grep "executable" | grep ELF | cut -f 1 -d : | xargs -r strip --strip-unneeded
 	echo -e ${OK}
 
 	echo -ne "	${STAR} Stripping libraries ... " &&
